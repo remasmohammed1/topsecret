@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SURPRISE</title>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: radial-gradient(circle at top, #1f1f1f, #0f0f0f);
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+
+        #startBtn {
+            margin-top: 40vh;
+            padding: 15px 30px;
+            font-size: 18px;
+            background: #ff4d6d;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+        }
+
+        #text {
+            display: none;
+            font-size: 20px;
+            width: 80%;
+            margin: auto;
+            margin-top: 80px;
+            line-height: 1.8;
+        }
+
+        .star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            from {
+                opacity: 0.2;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+
+        .heart {
+            position: fixed;
+            bottom: -10px;
+            color: red;
+            font-size: 20px;
+            animation: floatUp linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="startBtn" onclick="start()">دوس هنا بعد اذنك </button>
+
+    <h1 id="title" style="display:none;">HAPPY BIRTHDAY LOVIEE</h1>
+    <div id="text"></div>
+
+    <script>
+        const message = [
+            "my one and only <3",
+            "",
+            "You are my favorite person",
+            "My comfort",
+            "My happiness",
+            "",
+            "And today is all about you (دا علي اساس ان مش كل الايام عنك هه)",
+            "",
+            "i hope you achive all what you dream of",
+            "and i hope you be mine one day",
+            "you complete me <3",
+            "And just so you know, i will never stop loving you no matter what <3",
+            "yours only >> remii <3",
+            "BLAST IT BITCH !! , WELCOME TO YOUR TWENTIES (بقيت عجوز خلاص للاسف )",
+            "و صحيح دا السيكريت الي كنت مخبياه عليك ..ثوريي "
+        ];
+
+        let i = 0;
+        let j = 0;
+        let currentText = "";
+        let speed = 50;
+
+
+        function start() {
+            document.getElementById("startBtn").style.display = "none";
+            document.getElementById("text").style.display = "block";
+            document.getElementById("title").style.display = "block";
+
+            type();
+            setInterval(createHeart, 300);
+
+            for (let i = 0; i < 100; i++) {
+                createStar();
+            }
+        }
+
+
+        function type() {
+            if (i < message.length) {
+                if (j < message[i].length) {
+                    currentText += message[i].charAt(j);
+                    document.getElementById("text").innerHTML = currentText;
+                    j++;
+                    setTimeout(type, speed);
+                } else {
+                    currentText += "<br><br>";
+                    j = 0;
+                    i++;
+                    setTimeout(type, 400);
+                }
+            }
+        }
+
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        /* النجوم */
+        function createStar() {
+            const star = document.createElement("div");
+            star.classList.add("star");
+
+            star.style.left = Math.random() * 100 + "vw";
+            star.style.top = Math.random() * 100 + "vh";
+
+            star.style.animationDuration = (1 + Math.random() * 2) + "s";
+
+            document.body.appendChild(star);
+        }
+    </script>
+
+</body>
+
+</html>
